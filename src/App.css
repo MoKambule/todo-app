@@ -78,3 +78,50 @@ h1 {
 
 
 }
+.todo-list {
+  display: flex;
+  flex-direction: column;
+
+}
+.btn-area{
+  margin-bottom: 15px;
+}
+.todo-list-item {
+  background-color: rgb(31, 29, 29);
+  display: flex;
+  justify-content: space-between;
+  padding: 25px;
+  padding-bottom: 10px;
+  padding-top:10px ;
+  margin-bottom: 10px;
+  box-shadow: 0px 3px 5px gray;
+}
+.todo-list-item h3{
+  font-size: 25px;
+  color: rgb(64, 25, 101);
+  font-weight: bold;
+  margin: 0;
+
+}
+.todo-list-item p{
+  font-size: 14px;
+  color: rgb(217, 72, 181);
+  margin-top: 8px;
+}
+.icon{
+  font-size: 35px;
+  cursor: pointer;
+ 
+}
+.icon:hover{
+  color: rgb(86, 86, 158);
+}
+.check-icon{
+  font-size: 25px;
+  margin-left: 10px;
+  color: rgb(79, 25, 81);
+
+}
+.check-icon:hover{
+color: rgb(86, 86, 158);
+}
