@@ -1,7 +1,7 @@
 
 import './App.css';
 import { useState,useEffect } from 'react';
-import { AiOutlineDelete } from 'react-icons/ai';
+import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
 import { BsCheckLg } from 'react-icons/bs';
 import { IconName } from "react-icons/io"
 
@@ -13,6 +13,9 @@ function App() {
   const [newTitle, setNewTitle] = useState("");
   const [newDescription,setNewDescription] = useState("");
   const [completedTodos,setCompletedTodos] = useState([]);
+  const [currentEdit, setCurrentEdit] = useState("");
+  const [currentEditedItem,setCurrentEditedItem] = useState("");
+  
 
   const handleAddTodo =() =>{
     let newTodoItem = {
@@ -51,15 +54,52 @@ function App() {
     updatedCompledrr.push(filteredItem);
     setCompletedTodos(updatedCompledrr);
     handleDeleteTodo(index);
+    localStorage.setItem('completedTodos', JSON.stringify(updatedCompledrr))
    }
-  
+
+  const handleDeleteCompletedTodo = (index)=>{
+     let reducedTodo = [...completedTodos];
+    reducedTodo.splice(index);
+
+    localStorage.setItem('completedTodos', JSON.stringify(reducedTodo));
+    setCompletedTodos(reducedTodo);
+
+  }
+   
   useEffect(()=>{
     let savedTodo = JSON.parse(localStorage.getItem('todolist'))
+    let savedCompleted = JSON.parse(localStorage.getItem('completedTodos'))
+
     if (savedTodo){
       setTodos(savedTodo);
     }
+    if (savedCompleted){
+      setCompletedTodos(savedCompleted)
+    }
 
   }, []);
+ 
+  const handleEdit = (ind,item)=>{
+      setCurrentEdit(ind);
+      setCurrentEditedItem(item);
+  }
+
+  const handleUpdatedTitle = (value)=>{
+      setCurrentEditedItem((prev) =>{
+        return {...prev,title:value}
+      })
+  }
+   const handleUpdatedDescription= (value)=>{
+      setCurrentEditedItem((prev) =>{
+        return {...prev,description:value}
+      })
+  }
+  const handleUpdateTodo = ()=>{
+      let prevTodo = [...allTodos];
+      prevTodo[currentEdit] = currentEditedItem;
+      setTodos(prevTodo);
+      setCurrentEdit("");
+  }
   return (
     <div className="App">
      <h1>My ToDos</h1>
@@ -85,6 +125,17 @@ function App() {
           </div>
           <div className='todo-list'>
             {isCompleteScreen ===false && allTodos.map((item, index) => {
+              if (currentEdit===index) {
+                return (
+                  <div className='edit_wrapper'>
+                    <input placeholder='Updated title' onChange={(e)=>handleUpdatedTitle(e.target.value)} value={currentEditedItem.title}/>
+                    <textarea placeholder='Updated title'  
+                    rows={4}
+                    onChange={(e)=>handleUpdatedDescription(e.target.value)} value={currentEditedItem.description}/>
+                    <button type='button' onClick={handleUpdateTodo} className='primarybtn' >Updated</button>
+                  </div>
+                );
+              }else{
               return (
                 <div className='todo-list-item' key={index}>
                   <div>
@@ -94,10 +145,11 @@ function App() {
                   <div>
                     <AiOutlineDelete className='icon'  onClick={() => handleDeleteTodo(index)} title='delete?'/>
                     <BsCheckLg className='check-icon' onClick={()=>handleComplete(index)} title='complete' />
+                    <AiOutlineEdit className='check-icon' onClick={()=>handleEdit(index,item)} title='Edit'/>  
                   </div>
                 </div>
               );
-            })}
+            }})}
                    {isCompleteScreen === true && completedTodos.map((item, index) => {
               return (
                 <div className='todo-list-item' key={index}>
@@ -105,6 +157,11 @@ function App() {
                     <h3>{item.title}</h3>
                     <p>{item.description}</p>
                     <p><small>Completed On: {item.completedOn}</small></p>
+                  </div>
+                  <div>
+                    <AiOutlineDelete className='icon' 
+                     onClick={() => handleDeleteCompletedTodo(index)} title='delete?'/>
+
                   </div>
                   <div>
                   </div>
