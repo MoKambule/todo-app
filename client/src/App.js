@@ -3,11 +3,13 @@ import './App.css';
 import { useState,useEffect } from 'react';
 import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
 import { BsCheckLg } from 'react-icons/bs';
-import { IconName } from "react-icons/io"
+import { IconName } from "react-icons/io";
+
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 
 
-function App() {
+function TodoApp() {
   const [isCompleteScreen, setIsCompleteScreen] = useState(false);
   const [allTodos,setTodos] = useState([]);
   const [newTitle, setNewTitle] = useState("");
@@ -101,6 +103,7 @@ function App() {
       setCurrentEdit("");
   }
   return (
+    
     <div className="App">
      <h1>My ToDos</h1>
      <div className='todo-wrapper'>
@@ -172,7 +175,29 @@ function App() {
           </div>
      </div>
     </div>
+
+    
   );
 }
 
+function About() {
+  return <h2>About This App</h2>;
+}
+
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<TodoApp />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </Router>
+  );
+}
+
+
+
 export default App;
+
+
