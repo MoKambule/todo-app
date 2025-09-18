@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom"; 
 import Navbar from "../../components/Navigation";
 import styles from './Landing.module.css';
-import landing from '../../assets/landingpage.png';
+import landing from '../../assets/landingpage.PNG';
 function Landing(){
     return(
         <>
@@ -10,8 +10,8 @@ function Landing(){
         <div className={styles.landing_wrapper}>
                 <div className={styles.landing_text}>
                     <h1>
-                        Schedule your daily tasks with
-                        <span className={styles.primarytext}>mini mo-learn</span>
+                        Schedule your daily tasks with 
+                        <span className={styles.primarytext}> mini mo-learn</span>
                     </h1>
                     <div className={styles.btnWrapper}>
                         <Link to="/register" className={styles.primaryBtn}>Register</Link>
