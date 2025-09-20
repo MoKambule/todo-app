@@ -1,0 +1,46 @@
+.login_card {
+  background-color: #1f1d1d;
+  padding: 2.5rem;
+  max-width: 400px;
+  margin: 5rem auto;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(159, 92, 255, 0.25);
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.login_card h4 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  font-size: 2rem;
+  color: #c084fc;
+}
+
+.input_wrapper {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  margin-right: 4rem;
+}
+
+.input_wrapper input {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1.5px solid #9f5cff;
+  background-color: #2e2b2b;
+  color: white;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.input_wrapper input::placeholder {
+  color: #bba0f9;
+}
+
+.input_wrapper input:focus {
+  border-color: #c084fc;
+  outline: none;
+  background-color: #3a375f;
+}
