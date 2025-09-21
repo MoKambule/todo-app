@@ -1,15 +1,38 @@
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './loging.module.css';
 import React, { useState } from 'react';
 import { VscAccount } from "react-icons/vsc";
+import AuthServices from '../../services/authServices';
+import { message } from 'antd';
+import { getErrorMessage } from '../../util/GetError';
 
 
 function Login(){
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const handleSubmit = () => {
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
+
+    const handleSubmit =  async () => {
         console.log('Logging in with:', username, password);
+        try{
+            setLoading(true);
+            let data = {
+                username, 
+                password
+            }
+            const response = await AuthServices.loginUser(data);
+            console.log(response.data);
+            localStorage.setItem('todoAppUser',JSON.stringify(response.data));
+            message.success("logged in Successfully");
+            navigate('/todo');
+            setLoading(false);
+        }catch(e){
+            console.log(e);
+            message.error(getErrorMessage(e))
+            setLoading(false);
+        }
     };
 
 
@@ -35,7 +58,7 @@ function Login(){
                     New User? <Link to="/register">Register</Link>
                 </div>
                 
-                <button disabled={!username || !password} onClick={handleSubmit}>Login</button>
+                <button  loading={loading} disabled={!username || !password} onClick={handleSubmit}>Login</button>
             </div>
         </div>
     )
