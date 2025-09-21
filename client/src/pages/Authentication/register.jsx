@@ -1,8 +1,56 @@
-import React from "react";
+
+import { Link } from 'react-router-dom';
+import styles from './register.module.css';
+import React, { useState } from 'react';
+import { VscAccount } from "react-icons/vsc";
+
 
 function Register(){
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
+    const [lastname, setLastname] = useState('');
+    const handleSubmit = () => {
+        console.log('Logging in with:', username, password);
+    };
+
+
     return(
-        <div>Register</div>
+        <div className={styles.login_card}>
+            <div>
+                 <div className={styles.icon_container}>
+                <VscAccount className={styles.icon_large} />
+            </div>
+
+                <h4>Register</h4>
+                 <div className={styles.input_wrapper}>
+                    <input placeholder="name"
+                    value={name}
+                    onChange={(e)=>setName(e.target.value)}/>
+                </div>
+                  <div className={styles.input_wrapper}>
+                    <input placeholder="lastname"
+                    value={lastname}
+                    onChange={(e)=>setLastname(e.target.value)}/>
+                </div>
+                <div className={styles.input_wrapper}>
+                    <input placeholder="username"
+                    value={username}
+                    onChange={(e)=>setUsername(e.target.value)}/>
+                </div>
+                 <div className={styles.input_wrapper}>
+                    <input  type="password" placeholder="password"
+                    value={password}
+                    onChange={(e)=>setPassword(e.target.value)}/>
+                </div>
+                <div className={styles.input_info}>
+                   Already have an account? <Link to="/login">Login</Link>
+                </div>
+                <div className={styles.button_container}>
+                <button disabled={!username || !password} onClick={handleSubmit}>Register</button>
+                </div>
+            </div>
+        </div>
     )
 }
 
