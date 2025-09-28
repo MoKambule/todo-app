@@ -5,6 +5,7 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const  authRoutes = require('./routes/authRoutes');
+const  todoroutes = require('./routes/todoRoutes');
 require('dotenv').config();
 
 const app = express();
@@ -21,7 +22,8 @@ app.use(cors({
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../client/build')));
 
-
+app.use('api', authRoutes);
+app.use('api/todo',todoroutes)
 
 
 mongoose.connect(process.env.MONGO_URI, {
