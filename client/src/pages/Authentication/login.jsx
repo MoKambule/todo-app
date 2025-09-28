@@ -6,6 +6,7 @@ import { VscAccount } from "react-icons/vsc";
 import AuthServices from '../../services/authServices';
 import { message } from 'antd';
 import { getErrorMessage } from '../../util/GetError';
+import Navbar from '../../components/Navigation';
 
 
 function Login(){
@@ -37,6 +38,8 @@ function Login(){
 
 
     return(
+        <>
+         <Navbar active= "my Task"/>
         <div className={styles.login_card}>
             <div>
                  <div className={styles.icon_container}>
@@ -57,11 +60,15 @@ function Login(){
                 <div className={styles.input_info}>
                     New User? <Link to="/register">Register</Link>
                 </div>
-                
-                <button  loading={loading} disabled={!username || !password} onClick={handleSubmit}>Login</button>
+                <div className={styles.button_container}>
+                <button disabled={!username || !password} onClick={handleSubmit}>
+                        {loading ? 'Logging in...' : 'Login'}
+                </button>
+                </div>
             </div>
         </div>
-    )
+         </>
+    );
 }
 
 export default Login

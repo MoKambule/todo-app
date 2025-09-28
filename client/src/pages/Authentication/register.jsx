@@ -3,6 +3,10 @@ import { Link,useNavigate } from 'react-router-dom';
 import styles from './register.module.css';
 import React, { useState } from 'react';
 import { VscAccount } from "react-icons/vsc";
+import AuthServices from '../../services/authServices';
+import { message } from 'antd';
+import Navbar from '../../components/Navigation';
+import { getErrorMessage } from '../../util/GetError';
 
 
 
@@ -25,7 +29,7 @@ function Register(){
                 username, 
                 password
             }
-            const response = await AuthServices.loginUser(data);
+            const response = await AuthServices.registerUser(data);
             console.log(response.data);
             localStorage.setItem('todoAppUser',JSON.stringify(response.data));
             message.success("registered Successfully");
@@ -39,6 +43,8 @@ function Register(){
     };
 
     return(
+        <>
+         <Navbar active= "my Task"/>
         <div className={styles.login_card}>
             <div>
                  <div className={styles.icon_container}>
@@ -47,13 +53,18 @@ function Register(){
 
                 <h4>Register</h4>
                  <div className={styles.input_wrapper}>
-                    <input placeholder="name"
+                    <div className={styles.input_wrapper}>
+                         <input placeholder="name"
                     value={name}
                     onChange={(e)=>setName(e.target.value)}/>
                 
-                    <input placeholder="lastname"
+                    </div>
+                   <div className={styles.input_wrapper}>
+                     <input placeholder="lastname"
                     value={lastname}
                     onChange={(e)=>setLastname(e.target.value)}/>
+                   </div>
+                   
                 </div>
                 <div className={styles.input_wrapper}>
                     <input placeholder="username"
@@ -69,11 +80,15 @@ function Register(){
                    Already have an account? <Link to="/login">Login</Link>
                 </div>
                 <div className={styles.button_container}>
-                <button  loading={loading} disabled={!username || !password} onClick={handleSubmit}>Register</button>
+<button 
+  disabled={loading || !username || !password} 
+  onClick={handleSubmit}>{loading ? 'Loading...' : 'Register'}
+</button>
                 </div>
             </div>
         </div>
-    )
+        </>
+    );
 }
 
-export default Register
+export default Register;

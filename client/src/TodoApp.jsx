@@ -3,6 +3,7 @@ import { useState,useEffect } from 'react';
 import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
 import { BsCheckLg } from 'react-icons/bs';
 import { IconName } from "react-icons/io";
+import Navbar from './components/Navigation';
 
 function TodoApp() {
   const [isCompleteScreen, setIsCompleteScreen] = useState(false);
@@ -98,7 +99,8 @@ function TodoApp() {
       setCurrentEdit("");
   }
   return (
-    
+    <>
+   <Navbar active= "my Task"/>
     <div className="App">
      <h1>My ToDos</h1>
      <div className='todo-wrapper'>
@@ -171,7 +173,7 @@ function TodoApp() {
      </div>
     </div>
 
-    
+     </>
   );
 }
 export default TodoApp;

@@ -2,12 +2,21 @@
 
 const mongoose = require('mongoose');
 const express = require('express');
+const cors = require('cors');
 const path = require('path');
-const  authRoutes = require('./routes/authRoutes')
+const  authRoutes = require('./routes/authRoutes');
+require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-require('dotenv').config();
+
+
+//enabling cors 
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials:true
+}));
+
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../client/build')));
@@ -38,3 +47,8 @@ app.get('/*', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+app.post('/api/login', (req, res) => {
+  res.json({ message: 'Logged in!' });
+});
+

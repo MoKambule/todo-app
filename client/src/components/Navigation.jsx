@@ -1,9 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {Link} from 'react-router-dom';
 import logo from '../assets/logo.png';
 import './Navigation.css'
+import { getUserDetails } from "../util/getUser";
 
 function Navbar({active}){
+  const [user,setUser] = useState('');
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  useEffect(()=>{
+    const userDetails = getUserDetails();
+    setUser(userDetails);
+  },[]);
+
+   const toggleDropdown = () => {
+    setDropdownOpen(prev => !prev);
+  };
+
+  
+  const handleLogout = () => {
+    localStorage.removeItem('todoAppUser');
+    window.location.reload();
+  };
+
     return(
         <header>
 <nav>
@@ -17,6 +36,15 @@ function Navbar({active}){
         Home
       </Link>
     </li>
+
+    {user && (
+      <li>
+        <Link to="/todo" className={active === 'myTask' ? 'activeNav' : ''}>
+          My Task
+        </Link>
+      </li>
+    )}
+
     <li>
       <Link to="/register" className={active === 'register' ? 'activeNav' : ''}>
         Register
@@ -29,6 +57,7 @@ function Navbar({active}){
     </li>
   </ul>
 </nav>
+
 </header>
 
       

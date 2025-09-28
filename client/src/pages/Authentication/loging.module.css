@@ -56,6 +56,15 @@
     font-size: 6rem;
 }
 
+.button_container {
+  display: flex;
+  justify-content: center; 
+  margin-top: 1rem;
+  margin-left: 8rem;
+  margin-right: 8rem;
+  padding: 2px 5px; font-size: 12px
+}
+
 button {
   width: 100%;
   padding: 0.75rem;
@@ -67,12 +76,11 @@ button {
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
-
-button:hover:enabled {
+ button:hover:enabled {
   background-color: #3a093d;
 }
 
 button:disabled {
-  background-color: #ccc;
+  background-color: #3b3a3a;
   cursor: not-allowed;
-}
+} 

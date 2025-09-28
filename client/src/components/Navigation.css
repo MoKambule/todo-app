@@ -45,7 +45,7 @@ nav {
 .navigation-menu li a:hover,
 .navigation-menu li a.activeNav {
   color: #c084fc; 
-  /* border-bottom: 2px solid #c084fc; */
+  
 }
 
 .logo_wrapper img {
@@ -53,4 +53,47 @@ nav {
   height: auto;   
   
   
+}
+
+.dropdown-container {
+  position: relative;
+  cursor: pointer;
+}
+
+.user-toggle {
+  padding: 8px;
+  background: transparent;
+  border: none;
+  color: white;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  list-style: none;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 8px 0;
+  margin: 0;
+  min-width: 150px;
+  z-index: 1000;
+}
+
+.dropdown-menu li {
+  padding: 8px 16px;
+}
+
+.dropdown-menu li:hover {
+  background-color: #f0f0f0;
+}
+
+.dropdown-menu button {
+  border: none;
+  background: none;
+  color: #333;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
 }
