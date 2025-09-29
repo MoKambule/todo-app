@@ -1,14 +1,24 @@
 
+---
+
 # 📝 Todo App with Authentication
 
-A full-stack Todo application built with **React**, **Node.js (Express)**, and **MongoDB**, supporting **user registration**, **authentication**, and **task management**.
+A full-stack Todo application built with:
+
+* 🖼 **React** (frontend)
+* 🔌 **Node.js + Express** (backend)
+* 💾 **MongoDB** with Mongoose
+* 🔐 User authentication using **JWT** and **bcrypt**
+
 ---
+
 ## 📁 Project Structure
+
 ```
 todo-app/
 ├── client/               # React frontend
-│   ├── src/
 │   ├── public/
+│   ├── src/
 │   └── package.json
 ├── server/               # Express backend
 │   ├── controllers/
@@ -25,28 +35,27 @@ todo-app/
 
 ## ⚙️ Tech Stack
 
-### 🔹 Frontend (client/)
+### 🖥️ Frontend
 
-* **React**
-* **React Router (v6+)**
-* **React Icons**
-* **CSS / CSS Modules**
+* React (`react`, `react-dom`)
+* React Router DOM (v6)
+* React Icons
+* CSS Modules & global CSS
 
-### 🔹 Backend (server/)
+### ⚙️ Backend
 
-* **Express**
-* **Mongoose (MongoDB ODM)**
-* **MongoDB (local via Compass)**
-* **Bcrypt** – password hashing
-* **JSON Web Token (JWT)** – authentication
-* **dotenv** – environment variables
-* **CORS** – cross-origin request support
+* Express
+* MongoDB (with Mongoose)
+* bcrypt (for hashing passwords)
+* JSON Web Tokens (for auth)
+* dotenv
+* cors
 
 ---
 
 ## 📦 Dependencies
 
-### Frontend (`client/package.json`)
+### `client/package.json`
 
 ```json
 "dependencies": {
@@ -57,7 +66,7 @@ todo-app/
 }
 ```
 
-### Backend (`server/package.json`)
+### `server/package.json`
 
 ```json
 "dependencies": {
@@ -72,46 +81,44 @@ todo-app/
 
 ---
 
-## 🌱 Features
+## 🚀 How to Run the Project
 
-* User Registration (`/api/register`)
-* User Login (planned: `/api/login`)
-* Todo creation, editing, and deletion
-* Mark todos as complete/incomplete
-* Passwords hashed using Bcrypt
-* MongoDB data storage via Mongoose
-* React-based UI with routing
-* LocalStorage for todos (transitioning to backend)
-
----
-
-## 🛠️ Getting Started
-
-### 1. Clone the project
+### ✅ 1. Clone the repository
 
 ```bash
-git clone <repo-url>
+git clone <your-repo-url>
 cd todo-app
 ```
 
-### 2. Install dependencies
+---
+
+### ✅ 2. Install dependencies
+
+#### Root-level (optional for running both servers together)
 
 ```bash
-# Install root-level (for concurrently, optional)
 npm install
+```
 
-# Install frontend
+#### Client
+
+```bash
 cd client
 npm install
+```
 
-# Install backend
+#### Server
+
+```bash
 cd ../server
 npm install
 ```
 
-### 3. Configure environment variables
+---
 
-Create a `.env` file in the `server/` directory:
+### ✅ 3. Set up environment variables
+
+Create a `.env` file inside the `server/` directory:
 
 ```env
 PORT=5000
@@ -119,99 +126,51 @@ MONGO_URI=mongodb://localhost:27017/companion-app
 JWT_SECRET=your_jwt_secret_here
 ```
 
-Make sure `.env` is in your `.gitignore`.
+Make sure `.env` is added to `.gitignore`!
 
-### 4. Set up React proxy
+---
 
-In `client/package.json`, add:
+### ✅ 4. Add proxy for development
+
+In `client/package.json`, add this:
 
 ```json
 "proxy": "http://localhost:5000"
 ```
 
-### 5. Run the project
+This lets React proxy API requests to your backend without CORS issues.
 
-#### Development mode:
+---
+
+### ✅ 5. Run the app in development mode
+
+#### Option 1: Run frontend and backend separately (2 terminals)
+
+**Terminal 1** – Start the backend:
 
 ```bash
-# From root directory
-npm run dev
+cd server
+npm start
 ```
 
-> Requires `concurrently` to be installed as a dev dependency.
+**Terminal 2** – Start the frontend:
 
-This will:
-
-* Start the backend at `http://localhost:5000`
-* Start the frontend at `http://localhost:3000`
-
----
-
-## 📡 API Overview
-
-| Route           | Method              | Description              |
-| --------------- | ------------------- | ------------------------ |
-| `/api/register` | POST                | Register a new user      |
-| `/api/login`    | POST                | (Planned) Log in a user  |
-| `/api/todo`     | GET/POST/PUT/DELETE | (Planned) CRUD for tasks |
-
----
-
-## 🗄️ MongoDB Notes
-
-* Local MongoDB instance used via Compass
-* Connection string:
-
-  ```
-  mongodb://localhost:27017/companion-app
-  ```
-* Collections (e.g., `users`, `todos`) are managed via Mongoose models
-
----
-
-## 🚧 TODO / Future Improvements
-
-* [ ] Implement `/api/login` route
-* [ ] Add JWT authentication & route protection
-* [ ] Store todos in MongoDB instead of localStorage
-* [ ] Protect todo routes per authenticated user
-* [ ] Add logout and user session handling
-* [ ] Improve responsive UI & UX
-* [ ] Deploy frontend and backend
-
----
-
-## 🧼 Git Ignore Tips
-
-Make sure your `.gitignore` includes:
-
-```
-node_modules/
-.env
-/build
-.DS_Store
+```bash
+cd client
+npm start
 ```
 
 ---
 
-## 💡 Development Notes
+#### Option 2: Run both using `concurrently` (from root)
 
-* React Router (`<Routes>` and `<Route>`) is used for navigation
-* CSS Modules are used for scoped styling in some components
-* Global CSS is used where needed
-* The backend serves the React app (in production mode only)
-
----
-
-## 📦 Optional Dev Setup: Concurrently
-
-Install `concurrently` to run frontend + backend from root:
+Install `concurrently` as a dev dependency:
 
 ```bash
 npm install concurrently --save-dev
 ```
 
-Then add to your root-level `package.json`:
+In root `package.json`, add:
 
 ```json
 "scripts": {
@@ -219,30 +178,126 @@ Then add to your root-level `package.json`:
 }
 ```
 
----
+Then just run:
 
-## 🧠 How It Works
-
-* On login/register, user info is stored in localStorage
-* Todos are managed on the client for now, with planned migration to MongoDB
-* Backend is modularized with:
-
-  * Controllers (`controllers/`)
-  * Routes (`routes/`)
-  * Models (`models/`)
-* CORS is enabled for development only
+```bash
+npm run dev
+```
 
 ---
 
-## 🚀 Deployment (Optional)
+### ✅ 6. Production build
 
-In production:
+To build and serve the React app from Express:
 
-1. Build React app: `cd client && npm run build`
-2. Serve it from Express backend:
+```bash
+cd client
+npm run build
+```
 
-   ```js
-   app.use(express.static(path.join(__dirname, '../client/build')));
-   ```
+In `server.js`, ensure you serve static files in production:
+
+```js
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../client/build')));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build/index.html'));
+  });
+}
+```
+
+Start server in production mode (e.g., using `NODE_ENV=production`):
+
+```bash
+NODE_ENV=production node server.js
+```
+
+---
+
+## 📡 API Overview
+
+| Route           | Method | Description                   |
+| --------------- | ------ | ----------------------------- |
+| `/api/register` | POST   | Register a new user           |
+| `/api/login`    | POST   | Login user (with JWT)         |
+| `/api/todo`     | GET    | Get all todos (protected)     |
+| `/api/todo`     | POST   | Create a new todo (protected) |
+| `/api/todo/:id` | PUT    | Update a todo (protected)     |
+| `/api/todo/:id` | DELETE | Delete a todo (protected)     |
+
+> 🛡️ JWT token must be included in `Authorization` header as `Bearer <token>`.
+
+---
+
+## 🔐 Authentication
+
+* User passwords are hashed using `bcrypt`
+* JWT is issued upon login and stored client-side (localStorage or cookies)
+* Protected routes require a valid token
+
+---
+
+## 🧪 MongoDB Info
+
+* Default connection:
+
+  ```
+  mongodb://localhost:27017/companion-app
+  ```
+
+* Managed with Mongoose models in `/models`
+
+* Access DB visually via MongoDB Compass
+
+---
+
+## ✅ Features
+
+* 🔐 User registration & login
+* 🗂️ CRUD for todos (create, update, delete)
+* 📦 MongoDB for storage
+* 🔏 JWT-based protected routes
+* 🎨 React UI with routing
+* 💾 LocalStorage fallback for offline todos (optional)
+* 🔄 Concurrent frontend/backend dev
+* 📁 Clean file structure and modular code
+
+---
+
+## 🚧 TODOs / Next Steps
+
+* [ ] Fully migrate todos from localStorage to backend
+* [ ] Add Logout functionality
+* [ ] Add user-specific todo filtering
+* [ ] Add user profile page
+* [ ] Improve error handling and loading states
+* [ ] Deploy to Render / Vercel / Railway
+
+---
+
+## 🧼 .gitignore Suggestions
+
+```bash
+# Node dependencies
+node_modules/
+
+# Environment variables
+.env
+
+# React build
+/build
+
+# OS junk files
+.DS_Store
+```
+
+---
+
+## 💡 Pro Tips
+
+* ✅ Only use one `<BrowserRouter>` in your app (usually in `index.js`)
+* 🛑 Avoid hardcoding backend URLs in React — use `proxy` in dev and relative paths
+* 🔁 Restart servers when editing `.env` or server config
+* 🔐 Never commit `.env` or JWT secrets to Git
 
 ---
