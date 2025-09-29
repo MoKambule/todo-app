@@ -57,33 +57,13 @@ todo-app/
 
 ### `client/package.json`
 
-```json
-"dependencies": {
-  "react": "^18.x.x",
-  "react-dom": "^18.x.x",
-  "react-router-dom": "^6.x.x",
-  "react-icons": "^4.x.x"
-}
-```
-
 ### `server/package.json`
-
-```json
-"dependencies": {
-  "express": "^5.x.x",
-  "mongoose": "^7.x.x",
-  "bcrypt": "^5.x.x",
-  "dotenv": "^16.x.x",
-  "jsonwebtoken": "^9.x.x",
-  "cors": "^2.x.x"
-}
-```
 
 ---
 
 ## 🚀 How to Run the Project
 
-### ✅ 1. Clone the repository
+### Clone the repository
 
 ```bash
 git clone <your-repo-url>
@@ -92,7 +72,7 @@ cd todo-app
 
 ---
 
-### ✅ 2. Install dependencies
+### Install dependencies
 
 #### Root-level (optional for running both servers together)
 
@@ -115,34 +95,7 @@ npm install
 ```
 
 ---
-
-### ✅ 3. Set up environment variables
-
-Create a `.env` file inside the `server/` directory:
-
-```env
-PORT=5000
-MONGO_URI=mongodb://localhost:27017/companion-app
-JWT_SECRET=your_jwt_secret_here
-```
-
-Make sure `.env` is added to `.gitignore`!
-
----
-
-### ✅ 4. Add proxy for development
-
-In `client/package.json`, add this:
-
-```json
-"proxy": "http://localhost:5000"
-```
-
-This lets React proxy API requests to your backend without CORS issues.
-
----
-
-### ✅ 5. Run the app in development mode
+### Run the app in development mode
 
 #### Option 1: Run frontend and backend separately (2 terminals)
 
@@ -186,7 +139,7 @@ npm run dev
 
 ---
 
-### ✅ 6. Production build
+### Production build
 
 To build and serve the React app from Express:
 
@@ -195,22 +148,7 @@ cd client
 npm run build
 ```
 
-In `server.js`, ensure you serve static files in production:
-
-```js
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../client/build')));
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build/index.html'));
-  });
-}
-```
-
-Start server in production mode (e.g., using `NODE_ENV=production`):
-
-```bash
-NODE_ENV=production node server.js
-```
+In `server.js`, ensure you serve static files in production
 
 ---
 
