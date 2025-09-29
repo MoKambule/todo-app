@@ -4,26 +4,31 @@ const mongoose = require('mongoose');
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+require('dotenv').config();
+
 const  authRoutes = require('./routes/authRoutes');
 const  todoroutes = require('./routes/todoRoutes');
-require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const isProduction = process.env.NODE_ENV === 'production';
 
 
 //enabling cors 
-app.use(cors({
-  origin: 'http://localhost:3000',
-  credentials:true
-}));
+if (!isProduction) {
+  app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+  }));
+}
 
+app.use('/api', authRoutes);
+app.use('api/todo',todoroutes);
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../client/build')));
 
-app.use('api', authRoutes);
-app.use('api/todo',todoroutes)
+
 
 
 mongoose.connect(process.env.MONGO_URI, {
@@ -50,7 +55,11 @@ app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
 
-app.post('/api/login', (req, res) => {
-  res.json({ message: 'Logged in!' });
-});
+// app.post('/api/login', (req, res) => {
+//   res.json({ message: 'Logged in!' });
+// });
 
+
+axios.post('/api/login', data, {
+  withCredentials: true, 
+});
