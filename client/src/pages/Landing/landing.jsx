@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom"; 
 import Navbar from "../../components/Navigation";
 import styles from './Landing.module.css';
-import landing from '../../assets/landingpage.PNG';
+import landing from '../../assets/landingpage.png';
 function Landing(){
     return(
         <>
