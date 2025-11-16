@@ -2,7 +2,7 @@ import './App.css';
 import { useState,useEffect } from 'react';
 import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
 import { BsCheckLg } from 'react-icons/bs';
-import { IconName } from "react-icons/io";
+//import { IconName } from "react-icons/io";
 import Navbar from './components/Navigation';
 
 function TodoApp() {

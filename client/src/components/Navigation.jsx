@@ -6,22 +6,22 @@ import { getUserDetails } from "../util/getUser";
 
 function Navbar({active}){
   const [user,setUser] = useState('');
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+ // const [dropdownOpen, setDropdownOpen] = useState(false);
 
   useEffect(()=>{
     const userDetails = getUserDetails();
     setUser(userDetails);
   },[]);
 
-   const toggleDropdown = () => {
-    setDropdownOpen(prev => !prev);
-  };
+  //  const toggleDropdown = () => {
+  //   setDropdownOpen(prev => !prev);
+  // };
 
   
-  const handleLogout = () => {
-    localStorage.removeItem('todoAppUser');
-    window.location.reload();
-  };
+  // const handleLogout = () => {
+  //   localStorage.removeItem('todoAppUser');
+  //   window.location.reload();
+  // };
 
     return(
         <header>
